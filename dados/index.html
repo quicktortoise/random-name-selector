@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<title>Dados</title>
+	<link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+	<link rel="stylesheet" href="../styles/main.css">
+	<link rel="stylesheet" href="../styles/dados.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+</head>
+<body>
+	<div class="app-container">
+		<h1 class="title">Dados</h1>
+
+		<div class="controls grid-container">
+			<div class="grid-item label">
+				<label for="lower-bound">Límite inferior:</label>
+			</div>
+			<div class="grid-item control">
+				<input type="number" id="lower-bound" min="0" max="99" value="0">
+			</div>
+			<div class="grid-item label">
+				<label for="upper-bound">Límite superior:</label>
+			</div>
+			<div class="grid-item control">
+				<input type="number" id="upper-bound" min="0" max="99" value="6">
+			</div>
+			<div class="grid-item button">
+				<button id="throw-dice">Lanzar dados</button>
+			</div>
+		</div>
+		<div>
+			<p id="result"></p>
+		</div>
+	</div>
+
+	<script src="../scripts/dados.js"></script>
+</body>
+</html>

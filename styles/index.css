@@ -1,0 +1,22 @@
+p {
+	margin: 0.5em 0;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+li {
+	margin: 0.125em 0;
+}
+
+.app-container > * + * {
+	margin-top: 1em;
+}
+
+.current-name {
+	margin: 0.75em 0;
+	font-weight: bold;
+}
