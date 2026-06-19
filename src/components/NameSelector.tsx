@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const MIN_NAMES = 2
 
@@ -6,12 +6,22 @@ export function NameSelector() {
   const [names, setNames] = useState<string[]>(['', ''])
   const [result, setResult] = useState<string | null>(null)
   const [history, setHistory] = useState<string[]>([])
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([])
+  const shouldFocusLast = useRef(false)
+
+  useEffect(() => {
+    if (shouldFocusLast.current) {
+      shouldFocusLast.current = false
+      inputRefs.current[names.length - 1]?.focus()
+    }
+  }, [names.length])
 
   function handleChange(index: number, value: string) {
     setNames((prev) => prev.map((n, i) => (i === index ? value : n)))
   }
 
   function addName() {
+    shouldFocusLast.current = true
     setNames((prev) => [...prev, ''])
   }
 
@@ -47,10 +57,12 @@ export function NameSelector() {
           {names.map((name, i) => (
             <li key={i}>
               <input
+                ref={(el) => { inputRefs.current[i] = el }}
                 type="text"
                 value={name}
                 placeholder="Name"
                 onChange={(e) => handleChange(i, e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') selectName() }}
                 className="w-full rounded-md border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-800 placeholder-slate-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder-slate-500 dark:focus:border-teal-400 dark:focus:ring-teal-400"
               />
             </li>

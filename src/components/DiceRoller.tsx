@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const BOUNDS_MIN = 0
+const BOUNDS_MIN = 1
 const BOUNDS_MAX = 99
 
 function randomInRange(min: number, max: number): number {
@@ -12,7 +12,7 @@ function randomInRange(min: number, max: number): number {
 }
 
 export function DiceRoller() {
-  const [lowerBound, setLowerBound] = useState(0)
+  const [lowerBound, setLowerBound] = useState(1)
   const [upperBound, setUpperBound] = useState(6)
   const [result, setResult] = useState<number | null>(null)
 
