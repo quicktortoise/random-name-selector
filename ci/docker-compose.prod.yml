@@ -1,0 +1,15 @@
+services:
+  random-name-selector:
+    image: localhost:5000/random-name-selector:latest
+    container_name: random-name-selector
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
+
+# vim: set ts=2 sts=2 sw=2 et:
