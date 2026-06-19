@@ -1,15 +1,8 @@
 import { useState } from 'react'
+import { randomInt } from '../lib/random'
 
 const BOUNDS_MIN = 1
 const BOUNDS_MAX = 99
-
-function randomInRange(min: number, max: number): number {
-  let n = min - 1
-  while (n < min || n > max) {
-    n = Math.floor(Math.random() * 100) % (max + 1)
-  }
-  return n
-}
 
 export function DiceRoller() {
   const [lowerBound, setLowerBound] = useState(1)
@@ -21,7 +14,7 @@ export function DiceRoller() {
       alert('Lower bound must be less than upper bound.')
       return
     }
-    setResult(randomInRange(lowerBound, upperBound))
+    setResult(randomInt(lowerBound, upperBound))
   }
 
   return (

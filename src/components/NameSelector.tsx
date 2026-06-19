@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { randomInt } from '../lib/random'
 
 const MIN_NAMES = 2
 
@@ -8,6 +9,7 @@ export function NameSelector() {
   const [history, setHistory] = useState<string[]>([])
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
   const shouldFocusLast = useRef(false)
+  const lastIndexRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (shouldFocusLast.current) {
@@ -39,8 +41,14 @@ export function NameSelector() {
       alert('All name fields must be filled in before selecting.')
       return
     }
-    const randomIndex = Math.floor(Math.random() * (names.length * 5) + 1) % names.length
-    const selected = names[randomIndex]
+
+    let index = randomInt(0, names.length - 1)
+    if (names.length > 1 && index === lastIndexRef.current) {
+      index = (index + 1) % names.length
+    }
+    lastIndexRef.current = index
+
+    const selected = names[index]
     setResult(selected)
     setHistory((prev) => [...prev, selected])
   }
